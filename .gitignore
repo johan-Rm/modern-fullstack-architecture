@@ -1,0 +1,19 @@
+### ignore tout ce qui ne concerne pas le starter pack ou l'architecture
+
+agentic-system/*
+api/*
+dev-book/*
+digital-management-studio/*
+docs/*
+lab/
+modern-web-apps/*
+schema/*
+
+unshared/
+
+/*.md
+!**/ARCHITECTURE.md
+!**/README.md
+#!**/SETUP.md
+!**/SILENCE.md
+!**/.gitignore
