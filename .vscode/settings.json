@@ -1,0 +1,21 @@
+{
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": "explicit",
+    "source.fixAll": "explicit"
+  },
+  "editor.rulers": [
+    88
+  ],
+  "files.trimTrailingWhitespace": true,
+  "[python]": {
+    "editor.defaultFormatter": "charliermarsh.ruff"
+  },
+  "git.ignoreMissingGitWarning": true,
+  "remote.autoForwardPortsSource": "hybrid",
+  "makefile.configureOnOpen": true,
+  "ruff.enable": true,
+  "ruff.path": [
+    "/home/johan/.local/bin/ruff"
+  ]
+}

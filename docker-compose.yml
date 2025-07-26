@@ -1,0 +1,84 @@
+services:
+  api:
+    build:
+      context: ./api/api-platform
+    container_name: graines_digitales_api
+    restart: unless-stopped
+    working_dir: /var/www/html
+    volumes:
+      - ./api/api-platform:/var/www/html
+    environment:
+      - APP_ENV=dev
+      - DATABASE_URL=pgsql://johanrm:test1234@db:5432/digital_management_system
+      - XDEBUG_MODE=debug
+      - XDEBUG_CONFIG=client_host=host.docker.internal client_port=9003
+    ports:
+      - "9003:9003"
+    depends_on:
+      - db
+    networks:
+      - graines_digitales
+
+  db:
+    image: postgres:15
+    container_name: graines_digitales_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: digital_management_system
+      POSTGRES_USER: johanrm
+      POSTGRES_PASSWORD: test1234
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - graines_digitales
+
+  nginx:
+    image: nginx:alpine
+    container_name: graines_digitales_nginx
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    volumes:
+      - ./api:/var/www/html
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - api
+    networks:
+      - graines_digitales
+
+  mailhog:
+    image: mailhog/mailhog
+    container_name: graines_digitales_mailhog
+    restart: unless-stopped
+    ports:
+      - "8025:8025"
+    networks:
+      - graines_digitales
+
+  cli:
+    environment:
+      - PYTHONPATH=/app/shared
+    build:
+      context: ./scripts
+      dockerfile: cli/Dockerfile
+    container_name: graines_digitales_cli
+    working_dir: /app/cli
+    command: tail -f /dev/null  # Keep container running
+    volumes:
+      - ./scripts:/app  # on monte seulement le dossier CLI complet dans /app
+      - ./schema:/app/shared/schema  # Nouveau chemin pour éviter création dans ./scripts
+      - ./tools/python:/app/shared/tools
+      - ./scripts/etl:/app/etl
+    depends_on:
+      - db
+    networks:
+      - graines_digitales
+
+volumes:
+  db_data:
+
+networks:
+  graines_digitales:
+    driver: bridge
