@@ -1,6 +1,6 @@
 # Modern FullStack Architecture
 
-> This document describes the global structure of the monorepo. Each folder is documented for clarity and maintainability. All naming and organization follow the project's best practices.
+> Ce dépôt documente une architecture fullstack modulaire et moderne, extraite d’un projet réel via un clone --orphan. Seule la structure documentaire est versionnée ici, sans code applicatif.
 
 ```bash
 .
