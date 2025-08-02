@@ -1,6 +1,7 @@
 # Modern FullStack Architecture
 
-> Ce dépôt documente une architecture fullstack modulaire et moderne, extraite d’un projet réel via un clone --orphan. Seule la structure documentaire est versionnée ici, sans code applicatif.
+> Ce dépôt documente une architecture fullstack modulaire et moderne, extraite d’un projet réel via un clone --orphan.
+> Seule la structure documentaire est versionnée ici, sans code applicatif.
 
 ```bash
 .
